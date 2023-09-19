@@ -1113,11 +1113,12 @@ GameObject:
   - component: {fileID: 442274132}
   - component: {fileID: 442274133}
   - component: {fileID: 442274134}
+  - component: {fileID: 442274137}
   - component: {fileID: 442274135}
   - component: {fileID: 442274136}
   m_Layer: 6
   m_Name: Player1
-  m_TagString: Player
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1234,7 +1235,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442274128}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5603e043440463c4897b258553910498, type: 3}
   m_Name: 
@@ -1366,6 +1367,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &442274137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442274128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bce993a56027b99409b48e395a3a47d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerType: 0
+  speed: 9
+  jumpForce: 50
 --- !u!1 &482204533
 GameObject:
   m_ObjectHideFlags: 0
@@ -3582,11 +3598,12 @@ GameObject:
   - component: {fileID: 1286047594}
   - component: {fileID: 1286047593}
   - component: {fileID: 1286047595}
+  - component: {fileID: 1286047598}
   - component: {fileID: 1286047596}
   - component: {fileID: 1286047597}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player2
-  m_TagString: Player
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3672,9 +3689,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.014248371, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.5142484
 --- !u!50 &1286047594
 Rigidbody2D:
   serializedVersion: 4
@@ -3703,7 +3720,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286047589}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6874b8f637fbddd48a2be0b14cdc70e1, type: 3}
   m_Name: 
@@ -3835,6 +3852,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1286047598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286047589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bce993a56027b99409b48e395a3a47d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerType: 1
+  speed: 9
+  jumpForce: 50
 --- !u!1 &1286144948
 GameObject:
   m_ObjectHideFlags: 0
@@ -4558,7 +4590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134ec42c71342dc47839ec9102bfafdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 70
+  timeLeft: 700
   timerText: {fileID: 889541588}
   gameOverCanvas: {fileID: 688975908}
   startWhis: {fileID: 1455845958}
@@ -5283,7 +5315,7 @@ GameObject:
   - component: {fileID: 1991742898}
   - component: {fileID: 1991742900}
   - component: {fileID: 1991742901}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}

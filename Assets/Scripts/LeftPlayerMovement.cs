@@ -18,7 +18,6 @@ public class LeftPlayerMovement : MonoBehaviour
     public float speedDecrease = 3.5f;
     public float jumpDecrease = 40.0f;
     
-
     public bool isGrounded = false;
     public bool isJumping = false;
     public Rigidbody2D rb;
@@ -31,26 +30,22 @@ public class LeftPlayerMovement : MonoBehaviour
         CancelInvoke("ResetJumpForce");
         Invoke("ResetJumpForce", jumpForceBstTime);
     }
-
     public void DecreaseJumpForce()
     {
         jumpForce = jumpDecrease;
         CancelInvoke("ResetJumpForce");
         Invoke("ResetJumpForce", jumpForceBstTime);
     }
-
     private void ResetJumpForce()
     {
         jumpForce = jumpForceDefault;
     }
-
     public void BoostSpeed()
     {
         speed = speedBoost;
         CancelInvoke("ResetSpeedForce");
         Invoke("ResetSpeedForce", speedBstTime);
     }
-
     public void DecreaseSpeed()
     {
         speed = speedDecrease;
