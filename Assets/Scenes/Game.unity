@@ -1112,7 +1112,6 @@ GameObject:
   - component: {fileID: 442274129}
   - component: {fileID: 442274132}
   - component: {fileID: 442274133}
-  - component: {fileID: 442274134}
   - component: {fileID: 442274137}
   - component: {fileID: 442274135}
   - component: {fileID: 442274136}
@@ -1210,7 +1209,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &442274133
 CircleCollider2D:
@@ -1225,34 +1224,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.014248371, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &442274134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 442274128}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5603e043440463c4897b258553910498, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 50
-  jumpForceDefault: 50
-  jumpForceBoosted: 70
-  jumpForceBstTime: 3.5
-  speedDefault: 5
-  speedBoost: 7
-  speedBstTime: 3.5
-  speedDecrease: 3.5
-  jumpDecrease: 40
-  isGrounded: 0
-  isJumping: 0
-  rb: {fileID: 442274132}
+  m_Radius: 0.5142484
 --- !u!114 &442274135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1260,7 +1234,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442274128}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1d07d74c47a45247bcdbe76ad2f681f, type: 3}
   m_Name: 
@@ -1291,7 +1265,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 216
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.055408
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -1380,8 +1354,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerType: 0
-  speed: 9
-  jumpForce: 50
+  speed: 7
+  jumpForce: 45
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &482204533
 GameObject:
   m_ObjectHideFlags: 0
@@ -3597,7 +3574,6 @@ GameObject:
   - component: {fileID: 1286047590}
   - component: {fileID: 1286047594}
   - component: {fileID: 1286047593}
-  - component: {fileID: 1286047595}
   - component: {fileID: 1286047598}
   - component: {fileID: 1286047596}
   - component: {fileID: 1286047597}
@@ -3646,8 +3622,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -240689051
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.6132076, g: 0.084846266, b: 0.084846266, a: 1}
@@ -3668,7 +3644,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286047589}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.814, y: -3.797, z: 0}
+  m_LocalPosition: {x: 9.78, y: -3.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3711,33 +3687,8 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1286047595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1286047589}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6874b8f637fbddd48a2be0b14cdc70e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 50
-  jumpForceDefault: 50
-  jumpForceBoosted: 70
-  jumpForceBstTime: 3.5
-  speedDefault: 5
-  speedBoost: 7
-  speedBstTime: 3.5
-  speedDecrease: 3.5
-  jumpDecrease: 40
-  isGrounded: 0
-  isJumping: 0
-  rb: {fileID: 1286047594}
 --- !u!114 &1286047596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3745,7 +3696,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286047589}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb347dd36d8c0154ba946fd44d6c329a, type: 3}
   m_Name: 
@@ -3865,8 +3816,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerType: 1
-  speed: 9
-  jumpForce: 50
+  speed: 7
+  jumpForce: 45
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1286144948
 GameObject:
   m_ObjectHideFlags: 0
