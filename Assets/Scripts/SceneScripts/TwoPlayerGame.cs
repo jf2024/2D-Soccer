@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Play : MonoBehaviour
+public class TwoPlayerGame : MonoBehaviour
 {
     public void LoadGameScene()
     {
