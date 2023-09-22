@@ -7,7 +7,7 @@ public class Play : MonoBehaviour
 {
     public void LoadGameScene()
     {
-        SceneManager.LoadSceneAsync("Game");
+        SceneManager.LoadSceneAsync("TwoPlayerGame");
         Time.timeScale = 1;
     }
 }

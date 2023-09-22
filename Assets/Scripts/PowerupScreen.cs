@@ -7,7 +7,7 @@ public class PowerupScreen : MonoBehaviour
 {
     public void LoadGameScene()
     {
-        SceneManager.LoadSceneAsync("Powerups");
+        SceneManager.LoadSceneAsync("PowerUps");
         //Time.timeScale = 1;
     }
 }
