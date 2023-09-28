@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,25 +15,11 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping = false;
     private float prevY;
 
-    private float jumpForceDefault = 50.0f;
-    private float jumpForceBoosted = 70.0f;
-    private float jumpForceBoostDuration = 3.5f;
-
-    private float speedDefault = 5.0f;
-    private float speedBoost = 7.0f;
-    private float speedBoostDuration = 3.5f;
-
-    private float speedDecrease = 3.5f;
-    private float jumpDecrease = 40.0f;
-
-    private LayerMask playerLayer; // The layer that represents other players.
+    public LayerMask playerLayer;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        // Set the appropriate layer mask based on the player's type.
-        playerLayer = (playerType == PlayerType.Right) ? LayerMask.NameToLayer("Player1") : LayerMask.NameToLayer("Player2");
     }
 
     private void Update()
@@ -48,7 +34,8 @@ public class PlayerMovement : MonoBehaviour
         {
             string jumpButton = (playerType == PlayerType.Right) ? "Jump" : "Jump2";
 
-            if (Input.GetButtonDown(jumpButton) && !isJumping)
+            // Check if the jump button is being held down
+            if (Input.GetButton(jumpButton) && !isJumping)
             {
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 isGrounded = false;
@@ -64,63 +51,158 @@ public class PlayerMovement : MonoBehaviour
             prevY = rb.velocity.y;
         }
 
-        // Check if the player can jump off another player.
-        if (CanJumpOffPlayer())
+        // Check if the player is above another player
+        if (IsPlayerAboveAnotherPlayer())
         {
-            // Assuming you want to add an extra force when jumping off another player:
-            float extraJumpForce = 20.0f; // You can adjust this value.
-
-            // Apply the extra jump force upward.
-            rb.AddForce(Vector2.up * extraJumpForce, ForceMode2D.Impulse);
+            // Allow jumping even if grounded
+            isGrounded = true;
         }
     }
-    private bool CanJumpOffPlayer()
+*//*    private void FixedUpdate()
     {
-        // Cast a ray downward to check if there's another player's collider beneath.
-        Vector2 rayOrigin = transform.position;
-        rayOrigin.y -= GetComponent<CircleCollider2D>().radius; // Adjust the ray origin to the bottom of the collider.
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, 0.1f, 1 << playerLayer);
+        // Check for overlapping with other players' colliders
+        Collider2D[] overlappedColliders = Physics2D.OverlapCircleAll(transform.position, GetComponent<CircleCollider2D>().radius, playerLayer);
 
-        // If the ray hits another player's collider, allow jumping off.
-        return hit.collider != null;
+        // If there are overlapped colliders (other players), allow jumping
+        if (overlappedColliders.Length > 1)
+        {
+            isJumping = false;
+        }
+    }*//*
+
+    private bool IsPlayerAboveAnotherPlayer()
+    {
+        // Cast ray downwards from the center of the player's collider
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, LayerMask.GetMask("Player"));
+
+        // Check if the ray hit another player
+        if (hit.collider != null && hit.collider.gameObject != gameObject)
+        {
+            return true;
+        }
+
+        return false;
     }
 
-    public void BoostJumpForce()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        jumpForce = jumpForceBoosted;
-        CancelInvoke("ResetJumpForce");
-        Invoke("ResetJumpForce", jumpForceBoostDuration);
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            isJumping = false;
+        }
+        else if (other.gameObject.CompareTag("Ball"))
+        {
+            Rigidbody2D ballRb = other.gameObject.GetComponent<Rigidbody2D>();
+            Vector2 direction = (ballRb.transform.position - transform.position).normalized;
+            ballRb.AddForce(direction, ForceMode2D.Impulse);
+        }
+*//*        else if (other.gameObject.CompareTag("Player"))
+        {
+            Vector2 pushDirection = (other.transform.position - transform.position).normalized;
+
+            // Apply a force to push the players away from each other
+            float pushForce = 50.0f; // Adjust this value as needed
+            rb.AddForce(-pushDirection * pushForce, ForceMode2D.Impulse);
+        }*//*
     }
 
-    public void DecreaseJumpForce()
+    private void OnCollisionExit2D(Collision2D other)
     {
-        jumpForce = jumpDecrease;
-        CancelInvoke("ResetJumpForce");
-        Invoke("ResetJumpForce", jumpForceBoostDuration);
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
+}
+*/
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem; // Import the Input System namespace
+
+public class PlayerMovement : MonoBehaviour
+{
+    public enum PlayerType { Left, Right }
+    public PlayerType playerType;
+
+    public float speed = 5.0f;
+    public float jumpForce = 50.0f;
+
+    private Rigidbody2D rb;
+    private bool isGrounded = false;
+    private bool isJumping = false;
+    private float prevY;
+
+
+    private PlayerInput playerInput; // Reference to the PlayerInput component
+
+    // Initialize the PlayerInput component
+    private void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
     }
 
-    private void ResetJumpForce()
+    private void Start()
     {
-        jumpForce = jumpForceDefault;
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    public void BoostSpeed()
+    private void Update()
     {
-        speed = speedBoost;
-        CancelInvoke("ResetSpeedForce");
-        Invoke("ResetSpeedForce", speedBoostDuration);
+        // Determine which player's input to process based on the playerType
+        InputAction movementAction = (playerType == PlayerType.Right) ? playerInput.actions["Player2Movement"] : playerInput.actions["Player1Movement"];
+
+        // Read the movement input value
+        float moveInput = movementAction.ReadValue<float>();
+
+        // Apply movement
+        Vector3 movement = new Vector3(moveInput, 0, 0);
+        transform.Translate(speed * Time.deltaTime * movement);
+
+        if (isGrounded)
+        {
+            // Determine which player's input to process based on the playerType
+            InputAction jumpAction = (playerType == PlayerType.Right) ? playerInput.actions["Player2Jump"] : playerInput.actions["Player1Jump"];
+
+            // Check if the jump button is being held down
+            if (jumpAction.ReadValue<float>() > 0 && !isJumping)
+            {
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                isGrounded = false;
+            }
+        }
+        else
+        {
+            if (rb.velocity.y == 0 && prevY < 0)
+            {
+                isGrounded = true;
+            }
+
+            prevY = rb.velocity.y;
+        }
+
+        // Check if the player is above another player
+        if (IsPlayerAboveAnotherPlayer())
+        {
+            // Allow jumping even if grounded
+            isGrounded = true;
+        }
     }
 
-    public void DecreaseSpeed()
+    private bool IsPlayerAboveAnotherPlayer()
     {
-        speed = speedDecrease;
-        CancelInvoke("ResetSpeedForce");
-        Invoke("ResetSpeedForce", speedBoostDuration);
-    }
+        // Cast ray downwards from the center of the player's collider
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, LayerMask.GetMask("Player"));
 
-    private void ResetSpeedForce()
-    {
-        speed = speedDefault;
+        // Check if the ray hit another player
+        if (hit.collider != null && hit.collider.gameObject != gameObject)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -146,3 +228,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
+
+
+
+
