@@ -1,49 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5.0f;
-    [SerializeField] private float _jumpForce = 23.0f; // Jump force in the 20-25 range, play around with this
+    [SerializeField] protected float _speed = 5.0f;
+    [SerializeField] protected float _jumpForce = 23.0f;
 
-    private Rigidbody2D _rigidbody;
     private Vector2 movement;
-    private bool isGrounded = false;
 
-    private PlayerInput _playerInput;
+    protected Rigidbody2D _rigidbody;
+    protected PlayerInput _playerInput;
+    protected bool isGrounded = false;
 
-    // Reference to foot 
     public Transform kickFoot;
-
-    // Kicking stuff
     private bool isKicking = false;
     private float kickTimer = 0.0f;
     private Quaternion startingRot;
 
-    //play around with all these variables here
     public float kickForce = 18.0f;
     public float kickDistance = 1.3f;
     public float kickDuration = 0.50f;
     public float kickConstant = 750.0f;
 
-    private void Awake()
+    public int playerNumber;
+
+    protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         Time.timeScale = 1;
         startingRot = kickFoot.rotation;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        // kicking logic using the new Input System
-        if (_playerInput.actions["Player1Kick"].triggered && !isKicking)
+        // Kicking using the new Input System
+        if (_playerInput.actions[$"Player{playerNumber}Kick"].triggered && !isKicking)
         {
             isKicking = true;
             kickTimer = 0.0f;
@@ -51,7 +47,6 @@ public class Player : MonoBehaviour
 
         if (isKicking)
         {
-            // Rotate the kick foot
             kickFoot.eulerAngles += new Vector3(0f, 0f, Time.deltaTime * kickConstant);
             kickTimer += Time.deltaTime;
 
@@ -63,33 +58,27 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        // Handle movement and jumping
         Move();
         Jump();
     }
 
-    private void Move()
+    protected virtual void Move()
     {
         _rigidbody.velocity = new Vector2(movement.x * _speed, _rigidbody.velocity.y);
     }
 
-    private void Jump()
+    protected virtual void Jump()
     {
         if (isGrounded)
         {
-            // Check if the jump action is currently held down
-            if (_playerInput.actions["Player1Jump"].ReadValue<float>() > 0)
+            // check if jump action is currently held down
+            if (_playerInput.actions[$"Player{playerNumber}Jump"].ReadValue<float>() > 0)
             {
                 _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
             }
         }
-    }
-
-    private void OnPlayer1Move(InputValue inputValue)
-    {
-        movement = inputValue.Get<Vector2>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -99,12 +88,18 @@ public class Player : MonoBehaviour
             isGrounded = true;
         }
 
-        // Check for collision with the ball during a kick
         if (isKicking && collision.gameObject.CompareTag("Ball"))
         {
-            // Apply extra force to ball
-            Vector2 kickForceStrength = (collision.transform.position - kickFoot.position).normalized * kickForce;
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(kickForceStrength, ForceMode2D.Impulse);
+            // vertical distance between the foot and the ball
+            float verticalDistance = Mathf.Abs(collision.transform.position.y - kickFoot.position.y);
+
+            // if the ball is close enough to foot and in front of player
+            if (verticalDistance < kickDistance && collision.transform.position.x > transform.position.x)
+            {
+                // apply force to ball
+                Vector2 kickForceStrength = (collision.transform.position - kickFoot.position).normalized * kickForce;
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(kickForceStrength, ForceMode2D.Impulse);
+            }
         }
     }
 
@@ -116,3 +111,5 @@ public class Player : MonoBehaviour
         }
     }
 }
+
+
