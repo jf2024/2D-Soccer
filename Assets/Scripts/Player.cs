@@ -47,7 +47,8 @@ public class Player : MonoBehaviour
 
         if (isKicking)
         {
-            kickFoot.eulerAngles += new Vector3(0f, 0f, Time.deltaTime * kickConstant);
+            float rotationDirection = (playerNumber == 1) ? 1f : -1f;
+            kickFoot.eulerAngles += new Vector3(0f, 0f, Time.deltaTime * kickConstant * rotationDirection);
             kickTimer += Time.deltaTime;
 
             if (kickTimer >= kickDuration)
@@ -90,13 +91,16 @@ public class Player : MonoBehaviour
 
         if (isKicking && collision.gameObject.CompareTag("Ball"))
         {
-            // vertical distance between the foot and the ball
+            // Vertical distance between the foot and the ball
             float verticalDistance = Mathf.Abs(collision.transform.position.y - kickFoot.position.y);
 
-            // if the ball is close enough to foot and in front of player
-            if (verticalDistance < kickDistance && collision.transform.position.x > transform.position.x)
+            // Calculate the direction from the player to the ball
+            Vector2 kickDirection = (collision.transform.position - kickFoot.position).normalized;
+
+            // Check if the ball is close enough to the foot
+            if (verticalDistance < kickDistance)
             {
-                // apply force to ball
+                // Apply force to the ball based on the player's facing direction
                 Vector2 kickForceStrength = (collision.transform.position - kickFoot.position).normalized * kickForce;
                 collision.gameObject.GetComponent<Rigidbody2D>().AddForce(kickForceStrength, ForceMode2D.Impulse);
             }

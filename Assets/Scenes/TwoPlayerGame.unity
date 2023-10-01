@@ -562,7 +562,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133272629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.02, y: -0.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -873,7 +873,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341501823}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b0829f7afc5089f46a2cf1fc687fe577, type: 3}
@@ -1112,9 +1112,9 @@ GameObject:
   - component: {fileID: 442274129}
   - component: {fileID: 442274132}
   - component: {fileID: 442274133}
-  - component: {fileID: 442274137}
-  - component: {fileID: 442274135}
   - component: {fileID: 442274136}
+  - component: {fileID: 442274139}
+  - component: {fileID: 442274140}
   m_Layer: 6
   m_Name: Player1
   m_TagString: Player1
@@ -1182,7 +1182,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442274128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.78, y: -3.78, z: 0}
+  m_LocalPosition: {x: -9.78, y: -4.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1227,24 +1227,6 @@ CircleCollider2D:
   m_Offset: {x: -0.014248371, y: 0}
   serializedVersion: 2
   m_Radius: 0.5142484
---- !u!114 &442274135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 442274128}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1d07d74c47a45247bcdbe76ad2f681f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isKicking: 0
-  ballRigidbody: {fileID: 416579506}
-  kickForce: 18
-  kickDistance: 1.5
-  kickDuration: 0.13
-  audioSource: {fileID: 0}
 --- !u!82 &442274136
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1252,7 +1234,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442274128}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4ec410743c6e3b748985f84952878f54, type: 3}
@@ -1341,7 +1323,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &442274137
+--- !u!114 &442274139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1350,15 +1332,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 442274128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bce993a56027b99409b48e395a3a47d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 376d9e90db797034392599cd6068cb38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerType: 0
-  speed: 7
-  jumpForce: 45
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  _speed: 5
+  _jumpForce: 23
+  kickFoot: {fileID: 1348040703}
+  kickForce: 18
+  kickDistance: 3
+  kickDuration: 0.1
+  kickConstant: 750
+  playerNumber: 1
+--- !u!114 &442274140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442274128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 7b640a706ad84714db8dcf2dcc9a822e, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &482204533
 GameObject:
   m_ObjectHideFlags: 0
@@ -2832,7 +2846,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1172842166
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3574,9 +3588,9 @@ GameObject:
   - component: {fileID: 1286047590}
   - component: {fileID: 1286047594}
   - component: {fileID: 1286047593}
-  - component: {fileID: 1286047598}
-  - component: {fileID: 1286047596}
   - component: {fileID: 1286047597}
+  - component: {fileID: 1286047600}
+  - component: {fileID: 1286047601}
   m_Layer: 6
   m_Name: Player2
   m_TagString: Player2
@@ -3644,7 +3658,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286047589}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.78, y: -3.78, z: 0}
+  m_LocalPosition: {x: 9.78, y: -4.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3689,24 +3703,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1286047596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1286047589}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb347dd36d8c0154ba946fd44d6c329a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isKicking: 0
-  ballRigidbody: {fileID: 416579506}
-  kickForce: 18
-  kickDistance: 1.3
-  kickDuration: 0.105
-  audioSource: {fileID: 0}
 --- !u!82 &1286047597
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3714,7 +3710,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286047589}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4ec410743c6e3b748985f84952878f54, type: 3}
@@ -3803,7 +3799,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1286047598
+--- !u!114 &1286047600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3812,15 +3808,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 1286047589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bce993a56027b99409b48e395a3a47d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 376d9e90db797034392599cd6068cb38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerType: 1
-  speed: 7
-  jumpForce: 45
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  _speed: 5
+  _jumpForce: 23
+  kickFoot: {fileID: 1066913590}
+  kickForce: 18
+  kickDistance: 3
+  kickDuration: 0.1
+  kickConstant: 750
+  playerNumber: 2
+--- !u!114 &1286047601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286047589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: c2154e330f2ad6a40b96dc13a444ea73, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1286144948
 GameObject:
   m_ObjectHideFlags: 0
@@ -4084,8 +4112,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348040702}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.453, y: -0.53, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.45, y: -0.53, z: 0}
   m_LocalScale: {x: 0.65, y: 0.27, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4157,8 +4185,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.06743368, y: 0.01122545}
-  m_Size: {x: 1.050939, y: 1.022474}
+  m_Offset: {x: 0.052541226, y: 0.011225472}
+  m_Size: {x: 1.0807244, y: 1.022478}
   m_Direction: 1
 --- !u!1 &1381599399
 GameObject:
@@ -4571,7 +4599,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455845955}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e37f5bb646502bb4a9acafe017b5eb8c, type: 3}
@@ -5318,7 +5346,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.23131748, g: 0.8113208, b: 0.08164228, a: 1}
+  m_Color: {r: 1, g: 0.6342002, b: 0.006289184, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
