@@ -1342,7 +1342,7 @@ MonoBehaviour:
   kickDistance: 3
   kickDuration: 0.1
   kickConstant: 750
-  playerNumber: 1
+  playerID: 0
 --- !u!114 &442274140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2244,9 +2244,9 @@ GameObject:
   m_Component:
   - component: {fileID: 972881008}
   - component: {fileID: 972881007}
-  - component: {fileID: 972881010}
   - component: {fileID: 972881011}
   - component: {fileID: 972881012}
+  - component: {fileID: 972881013}
   m_Layer: 0
   m_Name: Home Goal
   m_TagString: Untagged
@@ -2321,25 +2321,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &972881010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 972881006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 122a13c67960ff64a9ecfb84a80d57ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scorePlayer2: 0
-  ballTransform: {fileID: 416579505}
-  p2: {fileID: 1286047591}
-  p1: {fileID: 442274130}
-  HomeBallPos: {fileID: 1182204222}
-  startPos: {fileID: 798803965}
-  score2: {fileID: 282569077}
 --- !u!61 &972881011
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2353,7 +2334,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.008638963}
+  m_Offset: {x: -0.45599222, y: -0.008638978}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2364,7 +2345,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.98272204}
+  m_Size: {x: 0.08801556, y: 0.98272204}
   m_EdgeRadius: 0
 --- !u!82 &972881012
 AudioSource:
@@ -2462,6 +2443,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &972881013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972881006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29030c38e049d2241a2c78da9f85b796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scorePlayer1: 0
+  scorePlayer2: 0
+  ballTransform: {fileID: 416579505}
+  AwayBallPos: {fileID: 882992742}
+  HomeBallPos: {fileID: 1182204222}
+  ballStartPos: {fileID: 798803965}
+  p1: {fileID: 442274130}
+  p2: {fileID: 1286047591}
+  score1: {fileID: 1381599401}
+  score2: {fileID: 282569077}
 --- !u!1 &1000921472
 GameObject:
   m_ObjectHideFlags: 0
@@ -2918,8 +2921,9 @@ GameObject:
   - component: {fileID: 1182088853}
   - component: {fileID: 1182088852}
   - component: {fileID: 1182088854}
-  - component: {fileID: 1182088855}
   - component: {fileID: 1182088856}
+  - component: {fileID: 1182088855}
+  - component: {fileID: 1182088857}
   m_Layer: 0
   m_Name: Away Goal
   m_TagString: Untagged
@@ -3007,7 +3011,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.011406183}
+  m_Offset: {x: 0.4559922, y: -0.008638978}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3018,7 +3022,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.97718763}
+  m_Size: {x: 0.08801556, y: 0.982722}
   m_EdgeRadius: 0
 --- !u!114 &1182088855
 MonoBehaviour:
@@ -3027,7 +3031,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182088851}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae2a055b0d9aeaa49b18fa2dabe1c9db, type: 3}
   m_Name: 
@@ -3135,6 +3139,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1182088857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182088851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29030c38e049d2241a2c78da9f85b796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scorePlayer1: 0
+  scorePlayer2: 0
+  ballTransform: {fileID: 416579505}
+  AwayBallPos: {fileID: 882992742}
+  HomeBallPos: {fileID: 1182204222}
+  ballStartPos: {fileID: 798803965}
+  p1: {fileID: 442274130}
+  p2: {fileID: 1286047591}
+  score1: {fileID: 1381599401}
+  score2: {fileID: 282569077}
 --- !u!1 &1182204221
 GameObject:
   m_ObjectHideFlags: 0
@@ -3818,7 +3844,7 @@ MonoBehaviour:
   kickDistance: 3
   kickDuration: 0.1
   kickConstant: 750
-  playerNumber: 2
+  playerID: 1
 --- !u!114 &1286047601
 MonoBehaviour:
   m_ObjectHideFlags: 0
