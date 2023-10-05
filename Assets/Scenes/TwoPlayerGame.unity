@@ -2215,7 +2215,7 @@ Transform:
   m_GameObject: {fileID: 964608722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.19, y: -0.544, z: 0}
-  m_LocalScale: {x: 1, y: 0.22, z: 1}
+  m_LocalScale: {x: 1, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2233,7 +2233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbd65c6065461d4b867e0dce3e73317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowDownFactor: 1.5
+  slowDownFactor: 0.8
+  deadBall: 0.1
+  push: 2
 --- !u!1 &972881006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2922,7 +2924,6 @@ GameObject:
   - component: {fileID: 1182088852}
   - component: {fileID: 1182088854}
   - component: {fileID: 1182088856}
-  - component: {fileID: 1182088855}
   - component: {fileID: 1182088857}
   m_Layer: 0
   m_Name: Away Goal
@@ -3024,25 +3025,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.08801556, y: 0.982722}
   m_EdgeRadius: 0
---- !u!114 &1182088855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182088851}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae2a055b0d9aeaa49b18fa2dabe1c9db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scorePlayer1: 0
-  ballTransform: {fileID: 416579505}
-  AwayBallPos: {fileID: 882992742}
-  ballStartPos: {fileID: 798803965}
-  p1: {fileID: 442274130}
-  p2: {fileID: 1286047591}
-  score1: {fileID: 1381599401}
 --- !u!82 &1182088856
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5100,7 +5082,7 @@ Transform:
   m_GameObject: {fileID: 1844672283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14.193, y: -0.544, z: 0}
-  m_LocalScale: {x: 1, y: 0.22, z: 1}
+  m_LocalScale: {x: 1, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -5144,7 +5126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbd65c6065461d4b867e0dce3e73317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowDownFactor: 1.5
+  slowDownFactor: 0.8
+  deadBall: 0.1
+  push: 2
 --- !u!1 &1846024728
 GameObject:
   m_ObjectHideFlags: 0
