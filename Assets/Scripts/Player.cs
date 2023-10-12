@@ -1,6 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum PlayerID
+{
+    Player1,
+    Player2
+}
+
 public class Player : MonoBehaviour
 {
     [SerializeField] protected float _speed = 5.0f;
@@ -10,7 +16,7 @@ public class Player : MonoBehaviour
 
     protected Rigidbody2D _rigidbody;
     protected PlayerInput _playerInput;
-    protected bool isGrounded = false;
+    [SerializeField] protected bool isGrounded = false;
 
     public Transform kickFoot;
     private bool isKicking = false;
@@ -22,47 +28,26 @@ public class Player : MonoBehaviour
     public float kickDuration = 0.50f;
     public float kickConstant = 750.0f;
 
-    public int playerNumber;
+    public PlayerID playerID; 
 
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
     }
-
     protected virtual void Start()
     {
         Time.timeScale = 1;
         startingRot = kickFoot.rotation;
     }
-
-    protected virtual void Update()
-    {
-        // Kicking using the new Input System
-        if (_playerInput.actions[$"Player{playerNumber}Kick"].triggered && !isKicking)
-        {
-            isKicking = true;
-            kickTimer = 0.0f;
-        }
-
-        if (isKicking)
-        {
-            float rotationDirection = (playerNumber == 1) ? 1f : -1f;
-            kickFoot.eulerAngles += new Vector3(0f, 0f, Time.deltaTime * kickConstant * rotationDirection);
-            kickTimer += Time.deltaTime;
-
-            if (kickTimer >= kickDuration)
-            {
-                isKicking = false;
-                kickFoot.rotation = startingRot;
-            }
-        }
-    }
-
     protected virtual void FixedUpdate()
     {
-        Move();
         Jump();
+        Move();
+    }
+    protected virtual void Update()
+    {
+        HandleKicking();
     }
 
     protected virtual void Move()
@@ -74,10 +59,32 @@ public class Player : MonoBehaviour
     {
         if (isGrounded)
         {
-            // check if jump action is currently held down
-            if (_playerInput.actions[$"Player{playerNumber}Jump"].ReadValue<float>() > 0)
+            // Check if jump action is currently held down
+            if (_playerInput.actions[$"{playerID}Jump"].ReadValue<float>() > 0)
             {
                 _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            }
+        }
+    }
+
+    private void HandleKicking()
+    {
+        if (_playerInput.actions[$"{playerID}Kick"].triggered && !isKicking)
+        {
+            isKicking = true;
+            kickTimer = 0.0f;
+        }
+
+        if (isKicking)
+        {
+            float rotationDirection = (playerID == PlayerID.Player1) ? 1f : -1f;
+            kickFoot.eulerAngles += new Vector3(0f, 0f, Time.deltaTime * kickConstant * rotationDirection);
+            kickTimer += Time.deltaTime;
+
+            if (kickTimer >= kickDuration)
+            {
+                isKicking = false;
+                kickFoot.rotation = startingRot;
             }
         }
     }
@@ -105,6 +112,7 @@ public class Player : MonoBehaviour
                 collision.gameObject.GetComponent<Rigidbody2D>().AddForce(kickForceStrength, ForceMode2D.Impulse);
             }
         }
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -115,5 +123,3 @@ public class Player : MonoBehaviour
         }
     }
 }
-
-
