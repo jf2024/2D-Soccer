@@ -19,7 +19,15 @@ public class GameManager : Singleton<GameManager>
     public TextMeshProUGUI score1;
     public TextMeshProUGUI score2;
 
+    public float timeLeft = 90.0f;
+    public TextMeshProUGUI timerText;
+    public Canvas gameOverCanvas;
+
     AudioSource audioSource;
+    public AudioSource startWhis;
+    public AudioSource endWhis;
+    private bool hasPlayedStart = false;
+    private bool hasPlayedEnd = false;
 
     public PlayerStats p1stats = new PlayerStats();
     public PlayerStats p2stats = new PlayerStats();
@@ -29,6 +37,35 @@ public class GameManager : Singleton<GameManager>
         audioSource = GetComponent<AudioSource>(); 
         p1Start = p1.position;
         p2Start = p2.position;
+        startWhis.PlayOneShot(startWhis.clip, 1f);
+    }
+
+    private void Update()
+    {
+        if (!hasPlayedStart)
+        {
+            startWhis.PlayOneShot(startWhis.clip, 1f);
+            hasPlayedStart = true;
+        }
+
+        timeLeft -= Time.deltaTime;
+        int minutes = Mathf.FloorToInt(timeLeft / 60.0f);
+        int seconds = Mathf.FloorToInt(timeLeft % 60.0f);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+        if (timeLeft <= 0)
+        {
+            Time.timeScale = 0;
+
+            if (!hasPlayedEnd)
+            {
+                endWhis.PlayOneShot(endWhis.clip, 1f);
+                hasPlayedEnd = true;
+            }
+
+            timerText.text = "00:00";
+            gameOverCanvas.enabled = true;
+        }
     }
 
     public void GoalScored(int playerID)
