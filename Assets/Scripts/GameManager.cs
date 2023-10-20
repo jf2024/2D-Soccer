@@ -21,6 +21,7 @@ public class GameManager : Singleton<GameManager>
 
     public float timeLeft = 90.0f;
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI winnerText;
     public Canvas gameOverCanvas;
 
     AudioSource audioSource;
@@ -64,7 +65,12 @@ public class GameManager : Singleton<GameManager>
             }
 
             timerText.text = "00:00";
-            gameOverCanvas.enabled = true;
+
+            if (gameOverCanvas != null)
+            {
+                DetermineWinner();
+                gameOverCanvas.enabled = true;
+            }
         }
     }
 
@@ -89,6 +95,23 @@ public class GameManager : Singleton<GameManager>
         audioSource.PlayOneShot(audioSource.clip, 1f);
 
         ResetBallVelocity();
+    }
+
+    public void DetermineWinner()
+    {
+        if (scorePlayer1 > scorePlayer2) {
+            winnerText.text = "P1 wins!";
+            GameManager.Instance.p1stats.wins++;
+            GameManager.Instance.p2stats.loss++;
+        }
+        else if (scorePlayer2 > scorePlayer1)
+        {
+            winnerText.text = "P2 wins!";
+        }
+        else
+        {
+            winnerText.text = "Draw!";
+        }
     }
 
     private void ResetPosition()
