@@ -22,22 +22,15 @@ public class Winner : MonoBehaviour
         if (score1 > score2)
         {
             winner.text = "P1 wins!";
-            GameManager.Instance.p1stats.wins++;
-            GameManager.Instance.p2stats.loss++;
         }
         else if (score2 > score1)
         {
             winner.text = "P2 wins!";
-            GameManager.Instance.p2stats.wins++;
-            GameManager.Instance.p1stats.loss++;
         }
         else
         {
             winner.text = "Draw!";
-            GameManager.Instance.p1stats.draw++;
-            GameManager.Instance.p2stats.draw++;
         }
 
-        GameManager.Instance.getPlayerStats(1);
     }
 }

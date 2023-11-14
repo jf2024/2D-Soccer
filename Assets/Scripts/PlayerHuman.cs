@@ -17,8 +17,9 @@ public class PlayerHuman : Player
         }
     }
 
-    protected override void Awake()
+/*    protected override void Awake()
     {
         base.Awake();
-    }
+        Debug.Log("Stats: " + GameManager.Instance.p1stats.wins);
+    }*/
 }

@@ -5,9 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class TwoPlayerGame : MonoBehaviour
 {
+
     public void LoadGameScene()
     {
-        SceneManager.LoadSceneAsync("TwoPlayerGame");
+        SceneManager.LoadScene("TwoPlayerGame");
         Time.timeScale = 1;
     }
 }
+
+
+
+
+
+
+

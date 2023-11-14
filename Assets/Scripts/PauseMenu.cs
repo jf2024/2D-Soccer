@@ -3,13 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject pauseMenu;
+    public Canvas pauseCanvas; // Change the type to Canvas
 
     private bool isPaused = false;
 
     void Start()
     {
-        pauseMenu.SetActive(false);
+        pauseCanvas.enabled = false;
     }
 
     void Update()
@@ -30,21 +30,23 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0f;
-        pauseMenu.SetActive(true);
+        pauseCanvas.enabled = true;
         isPaused = true;
     }
 
     public void Resume()
     {
         Time.timeScale = 1f;
-        pauseMenu.SetActive(false);
+        pauseCanvas.enabled = false;
         isPaused = false;
     }
+
     public void MainMenu()
     {
         // Load the main menu scene
         SceneManager.LoadScene("Main Menu");
     }
+
     public void QuitGame()
     {
 #if UNITY_EDITOR
@@ -54,4 +56,3 @@ public class PauseMenu : MonoBehaviour
 #endif
     }
 }
-

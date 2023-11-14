@@ -1038,7 +1038,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1312207114}
-        m_TargetAssemblyTypeName: Play, Assembly-CSharp
+        m_TargetAssemblyTypeName: TwoPlayerGame, Assembly-CSharp
         m_MethodName: LoadGameScene
         m_Mode: 1
         m_Arguments:

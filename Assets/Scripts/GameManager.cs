@@ -1,108 +1,113 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
     public int scorePlayer1 = 0;
     public int scorePlayer2 = 0;
 
-    public Transform ballTransform;      
-    public Transform AwayBallPos;        
-    public Transform HomeBallPos;        
-    public Transform p1;                 
-    public Transform p2;                 
-    public Transform ballStartPos;       
+    [SerializeField] private Transform ballTransform;
+    [SerializeField] private Transform AwayBallPos;
+    [SerializeField] private Transform HomeBallPos;
+    [SerializeField] private Transform starterBallPos;
+    [SerializeField] private Transform p1;
+    [SerializeField] private Transform p2;
+    [SerializeField] private TextMeshProUGUI score1;
+    [SerializeField] private TextMeshProUGUI score2;
+
+    [Header("Timer")]
+    public float maxTime = 90.0f;
+    private float timeLeft;
+    [SerializeField] private TextMeshProUGUI timerText;
+
+    [Header("Game Over")]
+    [SerializeField] private Canvas gameOverCanvas;
+    [SerializeField] private TextMeshProUGUI winnerText;
+
+    [Header("Pause Menu")]
+    [SerializeField] private Canvas pauseMenu;
+
     private Vector3 p1Start;
     private Vector3 p2Start;
-    public TextMeshProUGUI score1;
-    public TextMeshProUGUI score2;
+    public bool hasPlayedStart = false;
+    public bool hasPlayedEnd = false;
 
-    public float timeLeft = 90.0f;
-    public TextMeshProUGUI timerText;
-    public TextMeshProUGUI winnerText;
-    public Canvas gameOverCanvas;
-
-    AudioSource audioSource;
-    public AudioSource startWhis;
-    public AudioSource endWhis;
-    private bool hasPlayedStart = false;
-    private bool hasPlayedEnd = false;
-
-    public PlayerStats p1stats = new PlayerStats();
-    public PlayerStats p2stats = new PlayerStats();
-
-    void Start()
+    public void nameS()
     {
-        audioSource = GetComponent<AudioSource>(); 
         p1Start = p1.position;
         p2Start = p2.position;
-        startWhis.PlayOneShot(startWhis.clip, 1f);
     }
+    private void Start()
+    {
+
+        nameS();
+
+        scorePlayer1 = 0;
+        scorePlayer2 = 0;
+        timeLeft = maxTime;
+
+        // Update UI
+        UpdateScoreUI();
+
+        StartGame();
+    }
+
 
     private void Update()
     {
-        if (!hasPlayedStart)
+        if (hasPlayedStart)
         {
-            startWhis.PlayOneShot(startWhis.clip, 1f);
-            hasPlayedStart = true;
-        }
+            UpdateTimer();
 
+            if (timeLeft <= 0 && !hasPlayedEnd)
+            {
+                Time.timeScale = 0;
+                hasPlayedEnd = true;
+
+                DetermineWinner();
+
+                if (gameOverCanvas != null)
+                {
+                    gameOverCanvas.enabled = true;
+                }
+            }
+        }
+    }
+
+    private void UpdateTimer()
+    {
         timeLeft -= Time.deltaTime;
+        timeLeft = Mathf.Max(timeLeft, 0f);
         int minutes = Mathf.FloorToInt(timeLeft / 60.0f);
         int seconds = Mathf.FloorToInt(timeLeft % 60.0f);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-
-        if (timeLeft <= 0)
-        {
-            Time.timeScale = 0;
-
-            if (!hasPlayedEnd)
-            {
-                endWhis.PlayOneShot(endWhis.clip, 1f);
-                hasPlayedEnd = true;
-            }
-
-            timerText.text = "00:00";
-
-            if (gameOverCanvas != null)
-            {
-                DetermineWinner();
-                gameOverCanvas.enabled = true;
-            }
-        }
     }
 
     public void GoalScored(int playerID)
     {
-        if (playerID == 1) // Player 1 scores
+        if (playerID == 1)
         {
             scorePlayer1++;
             score1.text = "P1: " + scorePlayer1;
-            ballTransform.position = AwayBallPos.position;
             ResetPosition();
         }
-        else if (playerID == 2) // Player 2 scores
+        else if (playerID == 2)
         {
             scorePlayer2++;
             score2.text = "P2: " + scorePlayer2;
-            ballTransform.position = HomeBallPos.position;
             ResetPosition();
         }
-
-        // Play audio
-        audioSource.PlayOneShot(audioSource.clip, 1f);
 
         ResetBallVelocity();
     }
 
     public void DetermineWinner()
     {
-        if (scorePlayer1 > scorePlayer2) {
+        if (scorePlayer1 > scorePlayer2)
+        {
             winnerText.text = "P1 wins!";
-            GameManager.Instance.p1stats.wins++;
-            GameManager.Instance.p2stats.loss++;
         }
         else if (scorePlayer2 > scorePlayer1)
         {
@@ -114,30 +119,85 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    private void ResetPosition()
+
+    public void ResetPosition()
     {
-        // Reset position of players
-        p2.position = p2Start;
         p1.position = p1Start;
+        p2.position = p2Start;
+
+        //PLAY AROUND WITH THESE TWO 
+
+        //ballTransform.position = (scorePlayer1 > scorePlayer2) ? AwayBallPos.position : HomeBallPos.position;
+        ballTransform.position = starterBallPos.position;
     }
 
-    private void ResetBallVelocity()
+    public void ResetBallVelocity()
     {
         Rigidbody2D ballRigidbody = ballTransform.GetComponent<Rigidbody2D>();
         ballRigidbody.velocity = Vector2.zero;
         ballRigidbody.angularVelocity = 0f;
     }
 
-    public void getPlayerStats(int pid)
+    public void StartGame()
     {
+        hasPlayedStart = true;
+        timeLeft = maxTime;
+        Time.timeScale = 1f;
 
-        PlayerStats pstats = pid == 1 ? p1stats : p2stats;
+        if (gameOverCanvas != null)
+        {
+            gameOverCanvas.enabled = false;
+        }
 
-        Debug.Log("p" + pid + "stats");
-
-        Debug.Log(pstats.wins);
-        Debug.Log(pstats.loss);
-        Debug.Log(pstats.draw);
-
+        if (pauseMenu != null)
+        {
+            pauseMenu.enabled = false;
+        }
     }
+
+    // Pause the game
+    public void PauseGame()
+    {
+        if (pauseMenu != null)
+        {
+            pauseMenu.enabled = true;
+            Time.timeScale = 0f;
+        }
+    }
+
+    // restart the game
+    public void RestartGame()
+    {
+        StartCoroutine(RestartCoroutine());
+    }
+
+    private IEnumerator RestartCoroutine()
+    {
+        yield return new WaitForSecondsRealtime(1.0f);
+
+        // Reset scores and timer
+        gameOverCanvas.enabled = false;
+        scorePlayer1 = 0;
+        scorePlayer2 = 0;
+        timeLeft = maxTime;
+
+        hasPlayedEnd = false;
+
+        // Update UI
+        UpdateScoreUI();
+
+        // Reset positions and ball velocity
+        ResetPosition();
+        ResetBallVelocity();
+
+        // Start the game again
+        StartGame();
+    }
+
+    public void UpdateScoreUI()
+    {
+        score1.text = "P1: " + scorePlayer1;
+        score2.text = "P2: " + scorePlayer2;
+    }
+
 }
