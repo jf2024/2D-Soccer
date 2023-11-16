@@ -34,21 +34,19 @@ public class GameManager : Singleton<GameManager>
     public bool hasPlayedStart = false;
     public bool hasPlayedEnd = false;
 
-    public void nameS()
+    public void PlayerStartPos()
     {
         p1Start = p1.position;
         p2Start = p2.position;
     }
     private void Start()
     {
-
-        nameS();
+        PlayerStartPos();
 
         scorePlayer1 = 0;
         scorePlayer2 = 0;
         timeLeft = maxTime;
 
-        // Update UI
         UpdateScoreUI();
 
         StartGame();
@@ -183,7 +181,6 @@ public class GameManager : Singleton<GameManager>
 
         hasPlayedEnd = false;
 
-        // Update UI
         UpdateScoreUI();
 
         // Reset positions and ball velocity
