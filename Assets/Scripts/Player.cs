@@ -19,9 +19,9 @@ public class Player : MonoBehaviour
     [SerializeField] protected bool isGrounded = false;
 
     public Transform kickFoot;
-    private bool isKicking = false;
-    private float kickTimer = 0.0f;
-    private Quaternion startingRot;
+    public bool isKicking = false;
+    public float kickTimer = 0.0f;
+    public Quaternion startingRot;
 
     public float kickForce = 18.0f;
     public float kickDistance = 1.3f;
@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void HandleKicking()
+    protected virtual void HandleKicking()
     {
         if (_playerInput.actions[$"{playerID}Kick"].triggered && !isKicking)
         {

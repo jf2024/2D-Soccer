@@ -16,10 +16,4 @@ public class PlayerHuman : Player
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
         }
     }
-
-/*    protected override void Awake()
-    {
-        base.Awake();
-        Debug.Log("Stats: " + GameManager.Instance.p1stats.wins);
-    }*/
 }

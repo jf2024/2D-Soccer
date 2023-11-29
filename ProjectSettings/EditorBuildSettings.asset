@@ -12,13 +12,13 @@ EditorBuildSettings:
     path: Assets/Scenes/TwoPlayerGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/SinglePlayerGame.unity
+    guid: 2919bc3f7dbfe2f418a20f93ed200e74
+  - enabled: 1
     path: Assets/Scenes/Controls.unity
     guid: 9146a909f5d9de647849b8c9a5129cdf
   - enabled: 1
     path: Assets/Scenes/PowerUps.unity
     guid: 6019e26ec8b8e20478e25e93a69feefa
-  - enabled: 1
-    path: Assets/Scenes/SinglePlayerMenu.unity
-    guid: 2919bc3f7dbfe2f418a20f93ed200e74
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c8815e18a2443e04392ef412aa1a25c6, type: 2}
