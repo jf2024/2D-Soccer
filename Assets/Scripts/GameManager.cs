@@ -34,6 +34,9 @@ public class GameManager : Singleton<GameManager>
     public bool hasPlayedStart = false;
     public bool hasPlayedEnd = false;
 
+    private bool isRestarting = false;
+    private float restartCooldown = 1.5f;
+
     public void PlayerStartPos()
     {
         p1Start = p1.position;
@@ -153,7 +156,6 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    // Pause the game
     public void PauseGame()
     {
         if (pauseMenu != null)
@@ -163,7 +165,6 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    // restart the game
     public void RestartGame()
     {
         StartCoroutine(RestartCoroutine());
@@ -171,7 +172,15 @@ public class GameManager : Singleton<GameManager>
 
     private IEnumerator RestartCoroutine()
     {
-        yield return new WaitForSecondsRealtime(1.0f);
+
+        if(isRestarting)
+        {
+            yield break;
+        }
+
+        isRestarting = true;
+
+        yield return new WaitForSecondsRealtime(restartCooldown);
 
         // Reset scores and timer
         gameOverCanvas.enabled = false;
@@ -189,6 +198,8 @@ public class GameManager : Singleton<GameManager>
 
         // Start the game again
         StartGame();
+
+        isRestarting = false;
     }
 
     public void UpdateScoreUI()
