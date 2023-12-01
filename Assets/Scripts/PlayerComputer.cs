@@ -5,87 +5,152 @@ using UnityEngine;
 public class PlayerComputer : Player
 {
     [SerializeField] private Transform ballTransform;
-    private bool isJumping = false;
+    [SerializeField] private float kickDistanceThreshold = 3.5f; // Adjust the threshold as needed
 
     protected override void Update()
     {
-        AIBehavior();
-    }
-
-    private void AIBehavior()
-    {
-        float ballDistance = Vector2.Distance(transform.position, ballTransform.position);
-
-        if (ballDistance < kickDistance)
+        if (ShouldKick())
         {
-            if (ShouldKick())
+            HandleKicking();
+        }
+        else if (ShouldJump())
+        {
+            if (ShouldKick())  // Check if the bot should kick while jumping
             {
                 HandleKicking();
             }
-            else if (!isJumping && ShouldJump())
+            else
             {
-                Jump();
+                base.Jump();
             }
         }
-        else
-        {
-            isJumping = false; // Reset jump state when not close to the ball
-            MoveTowardsBall(); // Move towards the ball
-        }
-    }
 
-    private bool ShouldKick()
-    {
-        // Implement kick decision logic based on factors like ball position and player's state
-        // For example, kick if the ball is at a favorable position and the player is not currently kicking.
-        return !isKicking && Random.value < 0.5f; // Adjust the probability as needed
-    }
-
-    private bool ShouldJump()
-    {
-        // Implement jump decision logic based on factors like ball position and player's state
-        // For example, jump if the ball is above the player and the player is not currently jumping.
-        return isGrounded && Random.value < 0.2f;
-    }
-
-    private void MoveTowardsBall()
-    {
-        // Implement movement logic to get closer to the ball
-        // For example, move towards the ball with a random chance.
-        if (Random.value < 0.5f)
-        {
-            Move(); // Move right
-        }
-        else
-        {
-            Move(); // Move left
-        }
+        MoveTowardsBall();
     }
 
     protected override void HandleKicking()
     {
-        isKicking = true;
+        if (!isKicking)
+        {
+            isKicking = true;
+            kickTimer = 0f;
+        }
 
         if (isKicking)
         {
-            float rotationDirection = (playerID == PlayerID.Player1) ? 1f : -1f;
-            kickFoot.eulerAngles += new Vector3(0f, 0f, Time.deltaTime * kickConstant * rotationDirection);
+            kickFoot.eulerAngles += new Vector3(0f, 0f, Time.deltaTime * kickConstant * -1f);
             kickTimer += Time.deltaTime;
 
             if (kickTimer >= kickDuration)
             {
                 isKicking = false;
-                kickFoot.rotation = startingRot;
+                StartCoroutine(ReturnToOriginalPosition()); // Start the coroutine to return to the original position
             }
         }
     }
 
+    // Coroutine to return the foot to its original position
+    private IEnumerator ReturnToOriginalPosition()
+    {
+        while (kickFoot.rotation != startingRot)
+        {
+            kickFoot.rotation = Quaternion.RotateTowards(kickFoot.rotation, startingRot, Time.deltaTime * kickConstant);
+            yield return null;
+        }
+
+        // Reset the kickTimer
+        kickTimer = 0f;
+    }
+
+
+    private void MoveTowardsBall()
+    {
+        // Calculate the direction from the bot to the anticipated future position of the ball
+        Vector2 anticipatedBallPosition = PredictFuturePosition(ballTransform.position, ballTransform.GetComponent<Rigidbody2D>().velocity);
+        Vector2 dirToAnticipatedBall = (anticipatedBallPosition - (Vector2)transform.position).normalized;
+
+        dirToAnticipatedBall *= base._speed * 0.21f;  // adjust this, try range between 0.20 - 0.30
+
+        // Set the movement vector
+        base.movement = dirToAnticipatedBall;
+        base.Move();
+    }
+
+    private Vector2 PredictFuturePosition(Vector2 currentPosition, Vector2 currentVelocity)
+    {
+        float predictionTime = 1f;   //adjust this, numbers between 0.95 - 1
+
+        return currentPosition + currentVelocity * predictionTime;
+    }
+
+
+    private bool ShouldKick()
+    {
+        // Check if the ball is near the bot based on distance
+        Vector2 directionToBall = ballTransform.position - transform.position;
+        float distanceToBall = directionToBall.magnitude;
+
+        // Return true if the bot is grounded or jumping and the ball is close
+        return (isGrounded || isJumping) && distanceToBall < kickDistanceThreshold;
+    }
+
+
+    private bool ShouldJump()
+    {
+        Vector2 directionToBall = ballTransform.position - transform.position;
+        bool shouldJump = isGrounded && directionToBall.y > 0;
+
+        return shouldJump;
+    }
+
+
     protected override void Jump()
     {
-        if (isGrounded)
+        if (isGrounded && ShouldJump())
         {
-            _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
-            isJumping = true; // Set the jump state
+            base._rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            base.isJumping = true;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+
+        if (isKicking && collision.gameObject.CompareTag("Ball"))
+        {
+            // Get the Rigidbody2D component of the ball
+            Rigidbody2D ballRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+
+            // Calculate the direction from the bot to the ball
+            Vector2 kickDirection = (collision.transform.position - kickFoot.position).normalized;
+
+            // Check if the ball is close enough to the foot
+            float verticalDistance = Mathf.Abs(collision.transform.position.y - kickFoot.position.y);
+            if (verticalDistance < kickDistance)
+            {
+                // Set the velocity of the ball based on the player's facing direction and kick force
+                ballRigidbody.velocity = kickDirection * kickForce;
+
+                // Optionally, you can dampen the ball's velocity if needed
+                ballRigidbody.velocity *= 0.5f; // Adjust the factor as needed
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
+
 }
+
+
+
+

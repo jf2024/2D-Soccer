@@ -8,5 +8,6 @@ public class SinglePlayer : MonoBehaviour
     public void LoadGameScene()
     {
         SceneManager.LoadScene("SinglePlayerGame");
+        Time.timeScale = 1;
     }
 }

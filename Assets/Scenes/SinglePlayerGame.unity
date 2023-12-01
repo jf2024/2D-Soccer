@@ -2695,7 +2695,7 @@ MonoBehaviour:
   p2: {fileID: 2098450651}
   score1: {fileID: 739581718}
   score2: {fileID: 2005191197}
-  maxTime: 5
+  maxTime: 90
   timerText: {fileID: 1163143828}
   gameOverCanvas: {fileID: 1834230826}
   winnerText: {fileID: 772303239}
@@ -3112,7 +3112,7 @@ Transform:
   m_GameObject: {fileID: 1440335807}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.453, y: -0.53, z: 0}
-  m_LocalScale: {x: 0.65, y: 0.27, z: 0.5}
+  m_LocalScale: {x: 0.857, y: 0.37, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 804295791}
@@ -3131,8 +3131,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06743368, y: 0.011225452}
-  m_Size: {x: 1.050939, y: 1.0224744}
+  m_Offset: {x: -0.1586462, y: 0.011225452}
+  m_Size: {x: 1.29294, y: 1.022483}
   m_Direction: 1
 --- !u!212 &1440335810
 SpriteRenderer:
@@ -3654,7 +3654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1570540382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.24, y: -2.27, z: 0}
   m_LocalScale: {x: 0.55, y: 0.55, z: 0.65}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4055,8 +4055,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _jumpForce: 23
+  movement: {x: 0, y: 0}
   isGrounded: 0
   kickFoot: {fileID: 1809037271}
+  isKicking: 0
+  kickTimer: 0
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
   kickForce: 18
   kickDistance: 3
   kickDuration: 0.1
@@ -4322,7 +4326,7 @@ Transform:
   m_GameObject: {fileID: 1809037270}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.45, y: -0.53, z: 0}
-  m_LocalScale: {x: 0.65, y: 0.27, z: 0.5}
+  m_LocalScale: {x: 0.857, y: 0.37, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1199241766}
@@ -4341,8 +4345,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.052541226, y: 0.011225472}
-  m_Size: {x: 1.0807244, y: 1.022478}
+  m_Offset: {x: 0.15864623, y: 0.011225442}
+  m_Size: {x: 1.2929401, y: 1.0224831}
   m_Direction: 1
 --- !u!212 &1809037273
 SpriteRenderer:
@@ -5155,13 +5159,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _jumpForce: 23
+  movement: {x: 0, y: 0}
   isGrounded: 0
   kickFoot: {fileID: 1440335808}
-  kickForce: 18
+  isKicking: 0
+  kickTimer: 0
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  kickForce: 50
   kickDistance: 3
   kickDuration: 0.1
   kickConstant: 750
   playerID: 1
+  ballTransform: {fileID: 1570540386}
+  kickDistanceThreshold: 2
 --- !u!82 &2098450647
 AudioSource:
   m_ObjectHideFlags: 0

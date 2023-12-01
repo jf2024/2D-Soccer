@@ -12,11 +12,12 @@ public class Player : MonoBehaviour
     [SerializeField] protected float _speed = 5.0f;
     [SerializeField] protected float _jumpForce = 23.0f;
 
-    private Vector2 movement;
+    public Vector2 movement;
 
     protected Rigidbody2D _rigidbody;
     protected PlayerInput _playerInput;
     [SerializeField] protected bool isGrounded = false;
+    protected bool isJumping = false; 
 
     public Transform kickFoot;
     public bool isKicking = false;
@@ -112,7 +113,6 @@ public class Player : MonoBehaviour
                 collision.gameObject.GetComponent<Rigidbody2D>().AddForce(kickForceStrength, ForceMode2D.Impulse);
             }
         }
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -122,4 +122,5 @@ public class Player : MonoBehaviour
             isGrounded = false;
         }
     }
+
 }

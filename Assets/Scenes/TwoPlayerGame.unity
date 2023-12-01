@@ -609,7 +609,7 @@ MonoBehaviour:
   p2: {fileID: 1286047591}
   score1: {fileID: 1381599401}
   score2: {fileID: 282569077}
-  maxTime: 5
+  maxTime: 90
   timerText: {fileID: 889541588}
   gameOverCanvas: {fileID: 688975908}
   winnerText: {fileID: 734870908}
@@ -1270,8 +1270,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _jumpForce: 23
+  movement: {x: 0, y: 0}
   isGrounded: 0
   kickFoot: {fileID: 1348040703}
+  isKicking: 0
+  kickTimer: 0
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
   kickForce: 18
   kickDistance: 3
   kickDuration: 0.1
@@ -3752,8 +3756,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _jumpForce: 23
+  movement: {x: 0, y: 0}
   isGrounded: 0
   kickFoot: {fileID: 1066913590}
+  isKicking: 0
+  kickTimer: 0
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
   kickForce: 18
   kickDistance: 3
   kickDuration: 0.1
