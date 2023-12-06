@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 1766528513255352217}
   - component: {fileID: 3189433007141962194}
   - component: {fileID: 1111308402193616857}
-  - component: {fileID: -829383318625040361}
-  m_Layer: 0
+  - component: {fileID: 7838808656058024650}
+  m_Layer: 10
   m_Name: JumpLess
-  m_TagString: Untagged
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-829383318625040361
+--- !u!114 &7838808656058024650
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,6 +121,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1184250071070465221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d87c531c297c6f4e8d005a8dd73bcb0, type: 3}
+  m_Script: {fileID: 11500000, guid: a802e8f7f84a4c847992a4377e58c079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerupType: 3
+  boostValue: 7
+  duration: 5

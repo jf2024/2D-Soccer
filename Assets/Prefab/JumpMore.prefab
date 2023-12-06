@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 218259011785290222}
   - component: {fileID: 218259011785290223}
   - component: {fileID: 218259011785290220}
-  - component: {fileID: 8608216550967197986}
-  m_Layer: 0
+  - component: {fileID: 4233276456368135633}
+  m_Layer: 10
   m_Name: JumpMore
-  m_TagString: Untagged
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8608216550967197986
+--- !u!114 &4233276456368135633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,8 +121,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 218259011785290216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1c2a0c411ea7954bb5fda4aed0cbc35, type: 3}
+  m_Script: {fileID: 11500000, guid: a802e8f7f84a4c847992a4377e58c079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpBoost: 25
-  jumpDuration: 5
+  powerupType: 2
+  boostValue: 7
+  duration: 5

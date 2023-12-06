@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 6390261203694401444}
   - component: {fileID: 6191064695844684966}
   - component: {fileID: -644006187925927575}
-  - component: {fileID: 4919078081450273329}
-  m_Layer: 0
+  - component: {fileID: -276795618013067282}
+  m_Layer: 10
   m_Name: SpeedMore
-  m_TagString: Untagged
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ PolygonCollider2D:
     - - {x: 0, y: 0.5773587}
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
---- !u!114 &4919078081450273329
+--- !u!114 &-276795618013067282
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,8 +123,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3461357393241343412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6003873b062bbdc4b98c4ac8e9f929ea, type: 3}
+  m_Script: {fileID: 11500000, guid: a802e8f7f84a4c847992a4377e58c079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedBoost: 7
-  speedDuration: 5
+  powerupType: 0
+  boostValue: 7
+  duration: 5

@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 1938188178765976100}
   - component: {fileID: 5216363571917120530}
   - component: {fileID: 4732213274790669104}
-  - component: {fileID: 2926057488783318203}
-  m_Layer: 0
+  - component: {fileID: 36702044164505779}
+  m_Layer: 10
   m_Name: SpeedLess
-  m_TagString: Untagged
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ PolygonCollider2D:
     - - {x: 0, y: 0.5773587}
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
---- !u!114 &2926057488783318203
+--- !u!114 &36702044164505779
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,6 +123,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6989805266414882292}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fea6bdc2e35ff646a26c8646c7f4d72, type: 3}
+  m_Script: {fileID: 11500000, guid: a802e8f7f84a4c847992a4377e58c079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerupType: 1
+  boostValue: 7
+  duration: 5
