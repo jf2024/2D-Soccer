@@ -21,7 +21,7 @@ public class PlayerComputer : Player
             }
             else
             {
-                base.Jump();
+                Jump();
             }
         }
 
@@ -106,11 +106,21 @@ public class PlayerComputer : Player
 
     protected override void Jump()
     {
-        if (isGrounded && ShouldJump())
+        if (isGrounded && ShouldJump() && !isJumping)
         {
+            base._rigidbody.velocity = new Vector2(base._rigidbody.velocity.x, 0f); // Reset vertical velocity before each jump
             base._rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
             base.isJumping = true;
+
+            // Optionally, reset isJumping after a delay to prevent immediate consecutive jumps
+            StartCoroutine(ResetJumpFlagAfterDelay());
         }
+    }
+
+    private IEnumerator ResetJumpFlagAfterDelay()
+    {
+        yield return new WaitForSeconds(0.2f); // Adjust the delay as needed
+        isJumping = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -146,6 +156,7 @@ public class PlayerComputer : Player
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
+            isJumping = false;
         }
     }
 
