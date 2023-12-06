@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,9 @@ public class Player : MonoBehaviour
 {
     [SerializeField] protected float _speed = 5.0f;
     [SerializeField] protected float _jumpForce = 23.0f;
+
+    private float originalSpeed; 
+    private float originalJumpForce; 
 
     public Vector2 movement;
 
@@ -40,6 +44,9 @@ public class Player : MonoBehaviour
     {
         Time.timeScale = 1;
         startingRot = kickFoot.rotation;
+
+        originalSpeed = _speed;
+        originalJumpForce = _jumpForce;
     }
     protected virtual void FixedUpdate()
     {
@@ -121,6 +128,61 @@ public class Player : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    public void BoostSpeed(float boostValue, float duration)
+    {
+        _speed += boostValue;
+
+        // Reset speed after duration
+        StartCoroutine(ResetPowerup(() => _speed = originalSpeed, duration));
+    }
+
+    public void DecreaseSpeed(float boostValue, float duration)
+    {
+        // Multiply by a factor to decrease speed
+        float speedFactor = 0.5f; // You can adjust this factor
+        _speed -= boostValue * speedFactor;
+
+        // Reset speed and controls after duration
+        StartCoroutine(ResetPowerup(() =>
+        {
+            _speed = originalSpeed;
+            // Reset controls to normal
+            movement.x *= -1;
+        }, duration));
+    }
+
+
+    public void BoostJumpForce(float boostValue, float duration)
+    {
+        _jumpForce += boostValue;
+
+        // Reset jump force after duration
+        StartCoroutine(ResetPowerup(() => _jumpForce = originalJumpForce, duration));
+    }
+
+    public void DecreaseJumpForce(float boostValue, float duration)
+    {
+        _jumpForce -= boostValue;
+
+        // Reset jump force after duration
+        StartCoroutine(ResetPowerup(() => _jumpForce = originalJumpForce, duration));
+    }
+
+    // Coroutine to reset power-up effect after a certain duration
+    private IEnumerator ResetPowerup(System.Action resetAction, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        // Call the provided reset action
+        resetAction.Invoke();
+    }
+
+    public void ResetPowerUpEffects()
+    {
+        _speed = originalSpeed;
+        _jumpForce = originalJumpForce;
     }
 
 }

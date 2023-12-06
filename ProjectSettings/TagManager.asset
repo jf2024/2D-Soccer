@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Player1
   - Player2
+  - Powerup
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Foot
   - Away Team
   - Ground
-  - 
+  - PowerUps
   - 
   - 
   - 

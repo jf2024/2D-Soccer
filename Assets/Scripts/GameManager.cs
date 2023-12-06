@@ -55,7 +55,6 @@ public class GameManager : Singleton<GameManager>
         StartGame();
     }
 
-
     private void Update()
     {
         if (hasPlayedStart)
@@ -170,19 +169,22 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(RestartCoroutine());
     }
 
-    private IEnumerator RestartCoroutine()
+    public void UpdateScoreUI()
     {
+        score1.text = "P1: " + scorePlayer1;
+        score2.text = "P2: " + scorePlayer2;
+    }
 
+    /*private IEnumerator RestartCoroutine()
+    {
         if(isRestarting)
         {
             yield break;
         }
-
         isRestarting = true;
 
         yield return new WaitForSecondsRealtime(restartCooldown);
 
-        // Reset scores and timer
         gameOverCanvas.enabled = false;
         scorePlayer1 = 0;
         scorePlayer2 = 0;
@@ -191,21 +193,68 @@ public class GameManager : Singleton<GameManager>
         hasPlayedEnd = false;
 
         UpdateScoreUI();
-
-        // Reset positions and ball velocity
         ResetPosition();
         ResetBallVelocity();
+        StartGame();
 
-        // Start the game again
+        isRestarting = false;
+    }*/
+    private IEnumerator RestartCoroutine()
+    {
+        if (isRestarting)
+        {
+            yield break;
+        }
+        isRestarting = true;
+
+        // Destroy existing power-up objects
+        DestroyExistingPowerUps();
+
+        yield return new WaitForSecondsRealtime(restartCooldown);
+
+        gameOverCanvas.enabled = false;
+        scorePlayer1 = 0;
+        scorePlayer2 = 0;
+        timeLeft = maxTime;
+
+        hasPlayedEnd = false;
+
+        UpdateScoreUI();
+        ResetPosition();
+        ResetBallVelocity();
+        ResetPowerUpEffects(); // Reset any power-up effects
+
         StartGame();
 
         isRestarting = false;
     }
 
-    public void UpdateScoreUI()
+    private void DestroyExistingPowerUps()
     {
-        score1.text = "P1: " + scorePlayer1;
-        score2.text = "P2: " + scorePlayer2;
+        GameObject[] powerUps = GameObject.FindGameObjectsWithTag("Powerup");
+        foreach (var powerUp in powerUps)
+        {
+            Destroy(powerUp);
+        }
+    }
+
+    private void ResetPowerUpEffects()
+    {
+        // Assuming you have references to the player objects, adjust these lines accordingly
+        Player player1 = p1.GetComponent<Player>();
+        Player player2 = p2.GetComponent<Player>();
+
+        if (player1 != null)
+        {
+            // Reset any power-up effects on player1
+            player1.ResetPowerUpEffects();
+        }
+
+        if (player2 != null)
+        {
+            // Reset any power-up effects on player2
+            player2.ResetPowerUpEffects();
+        }
     }
 
 }
