@@ -2801,7 +2801,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1172842167}
   - component: {fileID: 1172842166}
-  - component: {fileID: 1172842168}
+  - component: {fileID: 1172842169}
   m_Layer: 0
   m_Name: Powerups
   m_TagString: Untagged
@@ -2850,7 +2850,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1172842168
+--- !u!114 &1172842169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2864,9 +2864,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerups:
   - {fileID: 218259011785290216, guid: 012e258207de48640b1429aa5c7b60c0, type: 3}
-  - {fileID: 3461357393241343412, guid: add7bbd62016d0b47b0e3a4ad02c0f96, type: 3}
   - {fileID: 1184250071070465221, guid: d143f7b709ad9164daba529cc3d3f7f3, type: 3}
   - {fileID: 6989805266414882292, guid: 4b029563fbc2e6b42a94b28ff335e03d, type: 3}
+  - {fileID: 3461357393241343412, guid: add7bbd62016d0b47b0e3a4ad02c0f96, type: 3}
   spawnTime: 4
   maxPowerups: 4
 --- !u!1 &1182088851
