@@ -126,4 +126,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupType: 3
   boostValue: 7
-  duration: 5
+  duration: 4
