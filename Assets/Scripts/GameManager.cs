@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private TextMeshProUGUI score2;
 
     [Header("Timer")]
-    public float maxTime = 90.0f;
+    public float maxTime = 65.0f;
     private float timeLeft;
     [SerializeField] private TextMeshProUGUI timerText;
 
@@ -53,6 +53,8 @@ public class GameManager : Singleton<GameManager>
         UpdateScoreUI();
 
         StartGame();
+        AudioManager.Instance.PlayStartWhistle(); 
+        AudioManager.Instance.PlayBackgroundNoise(); 
     }
 
     private void Update()
@@ -71,6 +73,7 @@ public class GameManager : Singleton<GameManager>
                 if (gameOverCanvas != null)
                 {
                     gameOverCanvas.enabled = true;
+                    AudioManager.Instance.PlayEndWhistle();
                 }
             }
         }
@@ -119,15 +122,10 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-
     public void ResetPosition()
     {
         p1.position = p1Start;
         p2.position = p2Start;
-
-        //PLAY AROUND WITH THESE TWO 
-
-        //ballTransform.position = (scorePlayer1 > scorePlayer2) ? AwayBallPos.position : HomeBallPos.position;
         ballTransform.position = starterBallPos.position;
     }
 
@@ -183,7 +181,6 @@ public class GameManager : Singleton<GameManager>
         }
         isRestarting = true;
 
-        // Destroy existing power-up objects
         DestroyExistingPowerUps();
 
         yield return new WaitForSecondsRealtime(restartCooldown);
@@ -198,11 +195,18 @@ public class GameManager : Singleton<GameManager>
         UpdateScoreUI();
         ResetPosition();
         ResetBallVelocity();
-        ResetPowerUpEffects(); // Reset any power-up effects
+        ResetPowerUpEffects();
 
         StartGame();
+        AudioManager.Instance.PlayStartWhistle(); 
+        AudioManager.Instance.PlayBackgroundNoise(); 
 
         isRestarting = false;
+    }
+
+    private void StopBackgroundNoise()
+    {
+        AudioManager.Instance.StopBackgroundNoise();
     }
 
     private void DestroyExistingPowerUps()
@@ -216,19 +220,16 @@ public class GameManager : Singleton<GameManager>
 
     private void ResetPowerUpEffects()
     {
-        // Assuming you have references to the player objects, adjust these lines accordingly
         Player player1 = p1.GetComponent<Player>();
         Player player2 = p2.GetComponent<Player>();
 
         if (player1 != null)
         {
-            // Reset any power-up effects on player1
             player1.ResetPowerUpEffects();
         }
 
         if (player2 != null)
         {
-            // Reset any power-up effects on player2
             player2.ResetPowerUpEffects();
         }
     }
