@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public Canvas pauseCanvas; // Change the type to Canvas
+    public Canvas pauseCanvas;
 
     private bool isPaused = false;
 
@@ -43,7 +43,6 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        // Load the main menu scene
         SceneManager.LoadScene("Main Menu");
     }
 

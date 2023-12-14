@@ -20,7 +20,6 @@ public class Powerups : MonoBehaviour
 
     private void SpawnPowerup()
     {
-        //Debug.Log("pc" + powerupsCount);
         if (powerupsCount >= maxPowerups)
         {
             return;
@@ -31,11 +30,9 @@ public class Powerups : MonoBehaviour
         float y = Random.Range(spawnArea.bounds.min.y, spawnArea.bounds.max.y);
         Vector3 spawnPosition = new Vector3(x, y, 0f);
 
-
         // Choose a random powerup from the powerups array
         int index = Random.Range(0, powerups.Length);
         GameObject powerupPrefab = powerups[index];
-
 
         // Instantiate the powerup prefab
         GameObject powerup = Instantiate(powerupPrefab, spawnPosition, Quaternion.identity);

@@ -55,12 +55,9 @@ public class Powerup : MonoBehaviour
         }
     }
 
-    // Coroutine to reset power-up after a certain duration
     private IEnumerator ResetPowerup()
     {
         yield return new WaitForSeconds(duration);
-
-        // Reset the isBoosted flag
         isBoosted = false;
     }
 }

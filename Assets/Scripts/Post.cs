@@ -24,10 +24,8 @@ public class Post : MonoBehaviour
     {
         if (collidedBall != null)
         {
-            // check if the ball's velocity below the deadBall 
             if (collidedBall.velocity.magnitude < deadBall)
             {
-                // apply force to move the ball away from the post
                 Vector2 forceDirection = (transform.position - collidedBall.transform.position).normalized;
                 collidedBall.AddForce(forceDirection * push, ForceMode2D.Impulse);
             }

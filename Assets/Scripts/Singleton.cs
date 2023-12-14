@@ -30,14 +30,5 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
 	public virtual void Awake()
 	{
 		Debug.Log("GameManager Instance ID: " + this.GetInstanceID());
-/*		if (_instance == null)
-		{
-			_instance = this as T;
-			DontDestroyOnLoad(gameObject);
-		}
-		else
-		{
-			Destroy (gameObject);
-		}*/
 	}
 }

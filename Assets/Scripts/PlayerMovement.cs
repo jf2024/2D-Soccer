@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem; // Import the Input System namespace
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,10 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping = false;
     private float prevY;
 
+    private PlayerInput playerInput;
 
-    private PlayerInput playerInput; // Reference to the PlayerInput component
-
-    // Initialize the PlayerInput component
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -32,22 +30,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        // Determine which player's input to process based on the playerType
         InputAction movementAction = (playerType == PlayerType.Right) ? playerInput.actions["Player2Movement"] : playerInput.actions["Player1Movement"];
 
-        // Read the movement input value
         float moveInput = movementAction.ReadValue<float>();
 
-        // Apply movement
         Vector3 movement = new Vector3(moveInput, 0, 0);
         transform.Translate(speed * Time.deltaTime * movement);
 
         if (isGrounded)
         {
-            // Determine which player's input to process based on the playerType
             InputAction jumpAction = (playerType == PlayerType.Right) ? playerInput.actions["Player2Jump"] : playerInput.actions["Player1Jump"];
-
-            // Check if the jump button is being held down
             if (jumpAction.ReadValue<float>() > 0 && !isJumping)
             {
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);

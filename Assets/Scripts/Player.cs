@@ -67,7 +67,6 @@ public class Player : MonoBehaviour
     {
         if (isGrounded)
         {
-            // Check if jump action is currently held down
             if (_playerInput.actions[$"{playerID}Jump"].ReadValue<float>() > 0)
             {
                 _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
@@ -106,16 +105,12 @@ public class Player : MonoBehaviour
 
         if (isKicking && collision.gameObject.CompareTag("Ball"))
         {
-            // Vertical distance between the foot and the ball
             float verticalDistance = Mathf.Abs(collision.transform.position.y - kickFoot.position.y);
 
-            // Calculate the direction from the player to the ball
             Vector2 kickDirection = (collision.transform.position - kickFoot.position).normalized;
 
-            // Check if the ball is close enough to the foot
             if (verticalDistance < kickDistance)
             {
-                // Apply force to the ball based on the player's facing direction
                 Vector2 kickForceStrength = (collision.transform.position - kickFoot.position).normalized * kickForce;
                 collision.gameObject.GetComponent<Rigidbody2D>().AddForce(kickForceStrength, ForceMode2D.Impulse);
             }
@@ -133,8 +128,6 @@ public class Player : MonoBehaviour
     public void BoostSpeed(float boostValue, float duration)
     {
         _speed += boostValue;
-
-        // Reset speed after duration
         StartCoroutine(ResetPowerup(() => _speed = originalSpeed, duration));
     }
 
@@ -144,11 +137,9 @@ public class Player : MonoBehaviour
         float speedFactor = 0.5f; // You can adjust this factor
         _speed -= boostValue * speedFactor;
 
-        // Reset speed and controls after duration
         StartCoroutine(ResetPowerup(() =>
         {
             _speed = originalSpeed;
-            // Reset controls to normal
             movement.x *= -1;
         }, duration));
     }
@@ -157,25 +148,18 @@ public class Player : MonoBehaviour
     public void BoostJumpForce(float boostValue, float duration)
     {
         _jumpForce += boostValue;
-
-        // Reset jump force after duration
         StartCoroutine(ResetPowerup(() => _jumpForce = originalJumpForce, duration));
     }
 
     public void DecreaseJumpForce(float boostValue, float duration)
     {
         _jumpForce -= boostValue;
-
-        // Reset jump force after duration
         StartCoroutine(ResetPowerup(() => _jumpForce = originalJumpForce, duration));
     }
 
-    // Coroutine to reset power-up effect after a certain duration
     private IEnumerator ResetPowerup(System.Action resetAction, float duration)
     {
         yield return new WaitForSeconds(duration);
-
-        // Call the provided reset action
         resetAction.Invoke();
     }
 
