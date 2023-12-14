@@ -183,8 +183,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: P2 Controls (Right)
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 43bd4ee74f3dab14aba067aa2fc115ed, type: 2}
+  m_sharedMaterial: {fileID: 2246584684798954890, guid: 43bd4ee74f3dab14aba067aa2fc115ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -298,8 +298,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: P1 Controls (Left)
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 43bd4ee74f3dab14aba067aa2fc115ed, type: 2}
+  m_sharedMaterial: {fileID: 2246584684798954890, guid: 43bd4ee74f3dab14aba067aa2fc115ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1105,7 +1105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734786236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.81, y: 1.86, z: 0}
+  m_LocalPosition: {x: -4.81, y: 1.97, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1599,7 +1599,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497247888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.68, y: 1.86, z: 0}
+  m_LocalPosition: {x: 5.68, y: 1.973, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1646,8 +1646,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "W (Jump)\nA (Move Left)    \nD (Move Right)\nR (Kick)"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8b87966feacb90546bf8a9ab0cff2248, type: 2}
+  m_sharedMaterial: {fileID: 9216911605297184944, guid: 8b87966feacb90546bf8a9ab0cff2248, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1802,8 +1802,8 @@ MonoBehaviour:
   m_text: "Up Arrow (Jump)\nLeft Arrow (Move Left)    \nRight Arrow (Move Right)\nP
     (Kick)"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8b87966feacb90546bf8a9ab0cff2248, type: 2}
+  m_sharedMaterial: {fileID: 9216911605297184944, guid: 8b87966feacb90546bf8a9ab0cff2248, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1863,7 +1863,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 98.59785, w: 0}
+  m_margin: {x: 0, y: 0, z: 81.55679, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

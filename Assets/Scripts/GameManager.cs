@@ -175,30 +175,6 @@ public class GameManager : Singleton<GameManager>
         score2.text = "P2: " + scorePlayer2;
     }
 
-    /*private IEnumerator RestartCoroutine()
-    {
-        if(isRestarting)
-        {
-            yield break;
-        }
-        isRestarting = true;
-
-        yield return new WaitForSecondsRealtime(restartCooldown);
-
-        gameOverCanvas.enabled = false;
-        scorePlayer1 = 0;
-        scorePlayer2 = 0;
-        timeLeft = maxTime;
-
-        hasPlayedEnd = false;
-
-        UpdateScoreUI();
-        ResetPosition();
-        ResetBallVelocity();
-        StartGame();
-
-        isRestarting = false;
-    }*/
     private IEnumerator RestartCoroutine()
     {
         if (isRestarting)
