@@ -133,7 +133,6 @@ public class Player : MonoBehaviour
 
     public void DecreaseSpeed(float boostValue, float duration)
     {
-        // Multiply by a factor to decrease speed
         float speedFactor = 0.5f; // You can adjust this factor
         _speed -= boostValue * speedFactor;
 
