@@ -35,3 +35,38 @@ Follow these steps to set up the project:
 
 
 ### Below are some pictures to get a feel of the game
+<br>
+</br>
+
+<p align="center">
+  <img src="https://github.com/jf2024/2D-Soccer/assets/65199388/1d77b70b-64ac-4a10-8644-c45c35d93ac6" alt="Main Menu"/>
+     <br>
+  <em>Home Screen</em>
+</p>
+
+<br>
+</br>
+
+<p align="center">
+  <img src="https://github.com/jf2024/2D-Soccer/assets/65199388/d91fa0d0-3fb7-463e-b083-fb9800059f93" alt="Controls"/>
+     <br>
+  <em>Controls Page</em>
+</p>
+
+<br>
+</br>
+
+<p align="center">
+  <img src="https://github.com/jf2024/2D-Soccer/assets/65199388/96243e04-e81c-491e-84e6-534feea0ce8d" alt="Powerups"/>
+     <br>
+  <em>PowerUps Page</em>
+</p>
+
+<br>
+</br>
+
+<p align="center">
+  <img src="https://github.com/jf2024/2D-Soccer/assets/65199388/b8cc6c4b-0f99-4a37-a45a-1fb9c3e6fa10" alt="GamePlay"/>
+     <br>
+  <em>GamePlay in Action (Left side is Player)</em>
+</p>
