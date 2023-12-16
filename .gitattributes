@@ -43,3 +43,6 @@
 *.psd filter=lfs -crlf
 *.tga filter=lfs -crlf
 *.tif filter=lfs -crlf
+
+**/shaders/* linguist=vendored=true
+**/cginc/* linguist-vendored=true
