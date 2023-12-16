@@ -48,3 +48,5 @@
 **/cginc/* linguist-vendored=true
 *.aspx linguist-vendored
 *.cginc linguist-vendored
+*.shader linguist-vendored
+
