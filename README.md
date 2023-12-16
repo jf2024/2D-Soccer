@@ -10,7 +10,7 @@ To delve deeper into my game's creation process, you can refer to the "Final Tec
 Follow these steps to set up the project:
 
 1. **Clone the Repository:**
-   Open the command prompt and run the following command to clone the repository to your local machine:
+   Open the command prompt and run the following command to clone the repository to your local machine: It may take a couple/few minutes for it to load fully
 
    ```bash
    git clone https://github.com/jf2024/2D-Soccer.git
